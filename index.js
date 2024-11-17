@@ -344,8 +344,8 @@ function createDataTexture() {
   var data = new Uint8Array(4 * size);
 
   // Define the rectangle dimensions
-  var rectWidth = Math.floor(sizes.width * 0.01); // 20% of the texture width
-  var rectHeight = Math.floor(sizes.height * 0.01); // 20% of the texture height
+  var rectWidth = Math.floor(sizes.width * 0.08); // 20% of the texture width
+  var rectHeight = Math.floor(sizes.height * 0.08); // 20% of the texture height
 
   // Calculate the starting position of the rectangle
   var rectXStart = Math.floor((sizes.width - rectWidth) / 2);
