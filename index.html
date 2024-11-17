@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Quicksand:wght@300..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="icon" href="iconn.png" type="image/png">
+  <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
     <script id="vertexShader" type="x-shader/x-vertex">
@@ -184,8 +184,13 @@
             </div>
             <div class="slidecontainer">
               <h1>size</h1>
-              <input type="range" min="0.003" max="0.5" value="0.001" class="slider" id="sizeRange" step="0.001">
+              <input type="range" min="0.003" max="0.1" value="0.01" class="slider" id="sizeRange" step="0.001">
               <h1 class="value"  id="sizeValue">?</h1>
+            </div>
+            <div class="slidecontainer">
+              <h1>speed</h1>
+              <input type="range" min="1" max="100" value="25" class="slider" id="speedRange" step="1">
+              <h1 class="value"  id="speedValue">?</h1>
             </div>
             <div class = "bottom">
               <button class="text" id="clear">clear</button>
