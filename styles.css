@@ -48,8 +48,7 @@ margin-left: 10px;
   position: absolute;
   top: 10px;
   left: 15px;
-  padding-left: 10px;
-  padding-right: 20px;
+
  
 
   
@@ -62,7 +61,7 @@ margin-left: 10px;
 }
 .t4:hover{
   font-weight: 600;
-  transform: scale(1.05);
+  transform: scale(0.9) translateX(-7px);
   color: rgba(255, 255, 255, 1);
   
 }
@@ -75,9 +74,8 @@ margin-left: 10px;
   z-index: 2;
   font-size: 20px;
   color: rgba(255, 255, 255, 0.5);
-  padding: 5px;
-  padding-top: 5px;
-  padding-left: 5px;
+  padding-right: 10px;
+
   
 
   mix-blend-mode: difference; 
@@ -100,9 +98,8 @@ margin-left: 10px;
   position: absolute;
   top: 50px;
   left: 15px;
-  padding-left: 10px;
-  padding-right: 20px;
-  padding-bottom: 10px;
+  padding-right: 5px;
+ 
   
   z-index: 2;
   color: rgba(255, 255, 255, 0.7);
@@ -118,7 +115,7 @@ margin-left: 10px;
 .github:hover{
   font-weight: 900;
   color: rgba(255, 255, 255, 0.9);
-  transform: scale(1.05);
+  transform: scale(0.9);
  
 }
 
@@ -149,8 +146,8 @@ font-weight: 500;
 font-family: "Quicksand", serif;
 user-select: none; /* Prevents text selection */
 display: block;
-padding-left: 10px;
-padding-right: 15px;
+padding-left: 5px;
+
 
 
 
@@ -168,13 +165,12 @@ transition: ease-in-out 0.3s;
 .accordion .tab__content {
 transition: ease-in-out 0.3s;
 border: 1.5px solid black; /* Add white border */
-padding: 10px;
+
 background-color: rgba(255,255,255, 0.6);
 display: none;
 border-radius: 10px;
 transform: translateY(40px);
 filter: invert(1);
-
 
 
 }
@@ -185,7 +181,7 @@ display: block;
 }
 .tab__label:hover{
 font-weight: 600;
-transform: scale(1.05);
+transform: scale(0.9);
 }
 
 
