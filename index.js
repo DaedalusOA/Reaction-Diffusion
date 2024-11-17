@@ -14,7 +14,7 @@ let ismob = isMobileDevice();
 if (ismob){
   sizeRange.value= 0.07;
   speedRange.value = 75;
-  alert("settings not available on mobile")
+  //alert("settings not available on mobile")
 }
 
 window.onload = function() {
@@ -47,7 +47,7 @@ var RightClick = 0.;
 
 document.addEventListener('mousedown', function(event) {
   
-  const rect = settings.getBoundingClientRect();
+    const rect = settings.getBoundingClientRect();
    const isInside = mouseX >= rect.left && mouseX <= rect.right && mouseY >= rect.top && mouseY <= rect.bottom;
 
 
@@ -377,6 +377,37 @@ function createDataTexture() {
   var rectXStart = Math.floor((sizes.width - rectWidth) / 2);
   var rectYStart = Math.floor((sizes.height - rectHeight) / 2);
 
+  // Get title rectangle and scale it to texture coordinates
+  
+  // Get title rectangle and scale it to texture coordinates
+  const tiRect = Name.getBoundingClientRect();
+  const textureXScale = sizes.width / window.innerWidth;
+  const textureYScale = sizes.height / window.innerHeight;
+  const rectLeft = Math.floor(tiRect.left * textureXScale);
+  const rectRight = Math.floor(tiRect.right * textureYScale);
+  const rectTop = Math.floor((window.innerHeight - tiRect.bottom) * textureYScale); // Flip y
+  const rectBottom = Math.floor((window.innerHeight - tiRect.top) * textureYScale); // Flip y
+
+  const st_Rect = Sett.getBoundingClientRect();
+  const st_rectLeft = Math.floor(st_Rect.left * textureXScale);
+  const st_rectRight = Math.floor(st_Rect.right * textureXScale);
+  const st_rectTop = Math.floor((window.innerHeight - st_Rect.bottom) * textureYScale); // Flip y
+  const st_rectBottom = Math.floor((window.innerHeight - st_Rect.top) * textureYScale); // Flip y
+
+  const tt_Rect = Title.getBoundingClientRect();
+  const tt_rectLeft = Math.floor(tt_Rect.left * textureXScale);
+  const tt_rectRight = Math.floor(tt_Rect.right * textureXScale);
+  const tt_rectTop = Math.floor((window.innerHeight - tt_Rect.bottom) * textureYScale); // Flip y
+  const tt_rectBottom = Math.floor((window.innerHeight - tt_Rect.top) * textureYScale); // Flip 
+
+  const g_Rect = git.getBoundingClientRect();
+  const g_rectLeft = Math.floor(g_Rect.left * textureXScale);
+  const g_rectRight = Math.floor(g_Rect.right * textureXScale);
+  const g_rectTop = Math.floor((window.innerHeight - g_Rect.bottom) * textureYScale); // Flip y
+  const g_rectBottom = Math.floor((window.innerHeight - g_Rect.top) * textureYScale); // Flip 
+
+
+
   // Loop through each pixel in the texture
   for (var y = 0; y < sizes.height; y++) {
     for (var x = 0; x < sizes.width; x++) {
@@ -395,6 +426,38 @@ function createDataTexture() {
         data[stride + 1] = 0; // Green
         data[stride + 2] = 0; // Blue
         data[stride + 3] = 255; // Alpha
+      }else if( x >= rectLeft && x < rectRight && y >= rectTop && y < rectBottom){
+        // Set the pixel to white
+        data[stride] = 0; // Red
+        data[stride + 1] = 255; // Green
+        data[stride + 2] = 0; // Blue
+        data[stride + 3] = 255; // Alpha
+
+
+      } else if( x >= st_rectLeft && x < st_rectRight && y >= st_rectTop && y < st_rectBottom){
+        // Set the pixel to white
+        data[stride] = 0; // Red
+        data[stride + 1] = 255; // Green
+        data[stride + 2] = 0; // Blue
+        data[stride + 3] = 255; // Alpha
+
+
+      }else if( x >= tt_rectLeft && x < tt_rectRight && y >= tt_rectTop && y < tt_rectBottom){
+        // Set the pixel to white
+        data[stride] = 0; // Red
+        data[stride + 1] = 255; // Green
+        data[stride + 2] = 0; // Blue
+        data[stride + 3] = 255; // Alpha
+
+
+      } else if( x >= g_rectLeft && x < g_rectRight && y >= g_rectTop && y < g_rectBottom){
+        // Set the pixel to white
+        data[stride] = 0; // Red
+        data[stride + 1] = 255; // Green
+        data[stride + 2] = 0; // Blue
+        data[stride + 3] = 255; // Alpha
+
+
       } else {
         // Set the pixel to black
         data[stride] = 0; // Red
@@ -402,6 +465,9 @@ function createDataTexture() {
         data[stride + 2] = 255; // Blue
         data[stride + 3] = 255; // Alpha
       }
+     
+
+
     }
   }
 
