@@ -14,7 +14,7 @@ let ismob = isMobileDevice();
 if (ismob){
   sizeRange.value= 0.07;
   speedRange.value = 75;
-  //alert("settings not available on mobile")
+ 
 }
 
 window.onload = function() {
@@ -156,6 +156,11 @@ reset.addEventListener('click', function() {
 
 });
 clear.addEventListener('click', function() {
+  const newDataTexture = createDataTexture(true);
+
+  // Update the texture in the buffer material
+  bufferMaterial.uniforms.uTexture.value = newDataTexture;
+
   renderer.setRenderTarget(renderBufferA);
   renderer.clear();
 
@@ -364,7 +369,7 @@ tick();
  * CREATE RANDOM NOISY TEXTURE
  */
 
-function createDataTexture() {
+function createDataTexture(clr = false) {
   // Create a buffer with color data
   var size = sizes.width * sizes.height;
   var data = new Uint8Array(4 * size);
@@ -419,7 +424,7 @@ function createDataTexture() {
         x >= rectXStart &&
         x < rectXStart + rectWidth &&
         y >= rectYStart &&
-        y < rectYStart + rectHeight
+        y < rectYStart + rectHeight && !clr
       ) {
         // Set the pixel to white
         data[stride] = 255; // Red
@@ -484,7 +489,6 @@ function createDataTexture() {
 
   return texture;
 }
-
 
 
 
