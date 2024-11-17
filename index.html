@@ -115,15 +115,21 @@
         laplaceB += texture2D(uTexture, vUvs + vec2(-1, 1) / uResolution.xy).b * 0.05;
         
         vec2 uv = gl_FragCoord.xy / uResolution.xy; // Normalize pixel coordinates
+        float k_mult = 1.;
+        if (lookup.g > 0.5){
+          k_mult = 0.5 + lookup.g;
+        }
         
 
         // Update concentrations
         float newA = A + ((udA) * laplaceA - A * B * B + ufeed * (1.0 - A));
-        float newB = B + (udB * laplaceB + A * B * B - (uk + ufeed) * B);
+        float newB = B + (udB * laplaceB + A * B * B - ((uk*k_mult) + ufeed) * B);
         
         // Clamp to prevent instability
         newA = clamp(newA, 0.0, 1.0);
         newB = clamp(newB, 0.0, 1.0);
+
+        
 
         
         
@@ -154,22 +160,21 @@
        // You can change this value to modify the interaction strength
         }
         // Output the color
-        gl_FragColor = vec4(newA, newA-newB, newB, 1.0);
+        gl_FragColor = vec4(newA, lookup.g, newB, 1.0);
       
       }
       </script>
 
-      <h2  class="t5">By Diego Ochoa</h2>
-      <a id="instructions" class="t4" href="https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system">Reaction Diffusion</a>
-      <a class="github" href="https://github.com/DiegoOchoaa/Reaction-Diffusion" class="t3" >github</a>  
+      <h2 id="Name" class="t5">By Diego Ochoa</h2>
+      <a id="Title" id="instructions" class="t4" href="https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system">Reaction Diffusion</a>
+      <a id="git" class="github" href="https://github.com/DiegoOchoaa/Reaction-Diffusion" class="t3" >github</a>  
 
       
       <section id="settings" class="accordion">
         <div class="tab">
           <input type="checkbox" name="accordion-1" id="cb1" checked>
-          <label for="cb1" class="tab__label">settings</label>
+          <label id="Sett" for="cb1" class="tab__label">settings</label>
           <div class="tab__content">
-            <h1>Reaction Diffusion Settings</h1>
             <div class="slidecontainer">
               <h1> dB</h1>
               <input type="range" min="0.6" max="1.16" value="1.0" class="slider" id="dBRange" step="0.01">
