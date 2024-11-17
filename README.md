@@ -1,7 +1,7 @@
 # Reaction-Diffusion Simulation
 This is a **Reaction-Diffusion** simulation I made using shaders with WebGL and Three.js, you can play with the **website** at https://diegoochoaa.github.io/Reaction-Diffusion/
 
-### Explanation
+### How it works
 
 It works by using two shaders that interchange themselves with a **ping-pong** system, 
 each cell computes its future value by adding up its current neighbors with the weights of the **reaction-diffusion** simulation, 
