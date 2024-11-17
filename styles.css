@@ -108,7 +108,7 @@ body{
 .accordion {
   position: absolute;
   right: 15px;
-  width: 35%;
+  width: 300px;
   max-width: 300px;
   margin: 20px auto;
 }
