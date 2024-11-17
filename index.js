@@ -1,5 +1,11 @@
 import * as THREE from "https://cdn.skypack.dev/three@0.146.0";
 
+
+window.onload = function() {
+  document.querySelectorAll('.accordion input[type="checkbox"]').forEach(input => {
+    input.checked = true; // Ensure all checkboxes are unchecked
+  });
+};
 /**
  * Base
  */
@@ -113,10 +119,11 @@ document.addEventListener('contextmenu', function(event) {
 
 // Add a click event listener to the button
 reset.addEventListener('click', function() {
-  kRange.value = 0.061;
+  kRange.value = 0.062;
   dBRange.value = 1.0;
   dARange.value= 0.5;
   feedRange.value= 0.055;
+  
 
   // Create a new data texture with a rectangle in the center
   const newDataTexture = createDataTexture();
@@ -284,10 +291,10 @@ const camera = new THREE.OrthographicCamera(- 1, 1, 1, - 1, 0, 1);
  * Animate
  */
 
-const stepsPerFrame = 40; // Number of updates per frame
+const stepsPerFrame = 25; // Number of updates per frame
 
 const tick = () => {
-  for (let i = 0; i < stepsPerFrame; i++) {
+  for (let i = 0; i < speedRange.value; i++) {
     // Render to the offscreen buffer
     renderer.setRenderTarget(renderBufferA);
     renderer.render(bufferScene, camera);
@@ -305,8 +312,8 @@ const tick = () => {
     bufferMaterial.uniforms.uk.value = kRange.value;
     bufferMaterial.uniforms.x.value = mouseX + touchX;
     bufferMaterial.uniforms.y.value = mouseY + touchY;
-    bufferMaterial.uniforms.Rpress.value = LeftClick + touch;
-    bufferMaterial.uniforms.Lpress.value = RightClick;
+    bufferMaterial.uniforms.Rpress.value = LeftClick;
+    bufferMaterial.uniforms.Lpress.value = RightClick + touch;
     bufferMaterial.uniforms.mSize.value = sizeRange.value;
    
     
@@ -318,6 +325,8 @@ const tick = () => {
   dAValue.textContent = dARange.value;
   feedValue.textContent = feedRange.value;
   sizeValue.textContent = sizeRange.value;
+  speedValue.textContent = speedRange.value;
+  
 
 
 
@@ -344,8 +353,8 @@ function createDataTexture() {
   var data = new Uint8Array(4 * size);
 
   // Define the rectangle dimensions
-  var rectWidth = Math.floor(sizes.width * 0.08); // 20% of the texture width
-  var rectHeight = Math.floor(sizes.height * 0.08); // 20% of the texture height
+  var rectWidth = Math.floor(sizes.width * 0.04); // 20% of the texture width
+  var rectHeight = Math.floor(sizes.height * 0.04); // 20% of the texture height
 
   // Calculate the starting position of the rectangle
   var rectXStart = Math.floor((sizes.width - rectWidth) / 2);
