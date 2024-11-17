@@ -37,7 +37,6 @@ body{
 
   .t4 {
     z-index: 2; /* Higher z-index to appear above the canvas */
-    color: rgba(255, 255, 255, 0.5);
     font-size: 30px;
     font-weight: 500;
     font-family: "Quicksand", serif;
@@ -50,13 +49,14 @@ body{
     
    
     z-index: 2;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
     user-select: none; /* Prevents text selection */
   }
   .t4:hover{
     font-weight: 600;
     transform: scale(1.05);
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .t5 {
