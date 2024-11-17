@@ -27,13 +27,10 @@
         //Our input texture
         uniform sampler2D uTexture; 
         varying vec2 vUvs;
+        uniform vec2 uResolution;
 
-        // Custom smoothstep-like function using a linear interpolation
-        float smoothstepCustom(float edge0, float edge1, float x) {
-            float t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
-            return t * t * (3.0 - 2.0 * t);
-        }
-      
+        
+
         void main() {
           //special method to sample from texture
           vec4 initTexture = texture2D(uTexture, vUvs);
@@ -42,7 +39,17 @@
           
           float final = initTexture.b;
 
-          gl_FragColor = vec4(1.-final*5.,1.-final*5.,1.-final*5., 1.0);
+  
+          float mult = 3.;
+          final = final*final*15.;
+          
+
+      
+          
+
+         
+
+          gl_FragColor = vec4(1.-final,1.-final,1.-final, 1.0);
       }
       </script>
       
@@ -52,6 +59,7 @@
         //Our input texture
         uniform sampler2D uTexture; 
         uniform vec2 uResolution;
+        
         uniform float udA;
         uniform float udB;
         uniform float ufeed;
