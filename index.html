@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Shader</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Quicksand:wght@300..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="icon" href="iconn.png" type="image/png">
+</head>
+<body>
+    <script id="vertexShader" type="x-shader/x-vertex">
+        varying vec2 vUvs;
+      
+      void main() {
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          vUvs = uv;
+      }
+      </script>
+
+      
+      <script id="fragmentShaderScreen" type="x-shader/x-fragment">
+      
+        precision mediump float;
+        //Our input texture
+        uniform sampler2D uTexture; 
+        varying vec2 vUvs;
+
+        // Custom smoothstep-like function using a linear interpolation
+        float smoothstepCustom(float edge0, float edge1, float x) {
+            float t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+            return t * t * (3.0 - 2.0 * t);
+        }
+      
+        void main() {
+          //special method to sample from texture
+          vec4 initTexture = texture2D(uTexture, vUvs);
+      
+          vec3 colour = initTexture.rgb;
+          
+          float final = initTexture.b;
+
+          gl_FragColor = vec4(final*0.5,final*0.9,final*2., 1.0);
+      }
+      </script>
+      
+      <script id="fragmentShaderBuffer" type="x-shader/x-fragment">
+      
+        precision mediump float;
+        //Our input texture
+        uniform sampler2D uTexture; 
+        uniform vec2 uResolution;
+        uniform float udA;
+        uniform float udB;
+        uniform float ufeed;
+        uniform float uk;
+        uniform float x;
+        uniform float y;
+        uniform float Lpress;
+        uniform float Rpress;
+        uniform float mSize;
+  
+
+
+        
+        varying vec2 vUvs;
+      
+        float laplaceA = 0.0;
+        float laplaceB = 0.0;
+        
+      
+      void main() {
+        vec3 color = vec3(0.0);
+
+        vec4 lookup = texture2D(uTexture, vUvs);
+    
+    
+        float A = lookup.r;
+        float B = lookup.b;
+        
+       
+        
+        // Compute Laplacian for A
+        laplaceA += texture2D(uTexture, vUvs + vec2(0, 0) / uResolution.xy).r * -1.0;
+        laplaceA += texture2D(uTexture, vUvs + vec2(1, 0) / uResolution.xy).r * 0.2;
+        laplaceA += texture2D(uTexture, vUvs + vec2(-1, 0) / uResolution.xy).r * 0.2;
+        laplaceA += texture2D(uTexture, vUvs + vec2(0, 1) / uResolution.xy).r * 0.2;
+        laplaceA += texture2D(uTexture, vUvs + vec2(0, -1) / uResolution.xy).r * 0.2;
+        
+        laplaceA += texture2D(uTexture, vUvs + vec2(1, 1) / uResolution.xy).r * 0.05;
+        laplaceA += texture2D(uTexture, vUvs + vec2(-1, -1) / uResolution.xy).r * 0.05;
+        laplaceA += texture2D(uTexture, vUvs + vec2(1, -1) / uResolution.xy).r * 0.05;
+        laplaceA += texture2D(uTexture, vUvs + vec2(-1, 1) / uResolution.xy).r * 0.05;
+        
+        // Compute Laplacian for B
+        laplaceB += texture2D(uTexture, vUvs + vec2(0, 0) / uResolution.xy).b * -1.0;
+        laplaceB += texture2D(uTexture, vUvs + vec2(1, 0) / uResolution.xy).b * 0.2;
+        laplaceB += texture2D(uTexture, vUvs + vec2(-1, 0) / uResolution.xy).b * 0.2;
+        laplaceB += texture2D(uTexture, vUvs + vec2(0, 1) / uResolution.xy).b * 0.2;
+        laplaceB += texture2D(uTexture, vUvs + vec2(0, -1) / uResolution.xy).b * 0.2;
+        
+        laplaceB += texture2D(uTexture, vUvs + vec2(1, 1) / uResolution.xy).b * 0.05;
+        laplaceB += texture2D(uTexture, vUvs + vec2(-1, -1) / uResolution.xy).b * 0.05;
+        laplaceB += texture2D(uTexture, vUvs + vec2(1, -1) / uResolution.xy).b * 0.05;
+        laplaceB += texture2D(uTexture, vUvs + vec2(-1, 1) / uResolution.xy).b * 0.05;
+        
+        // Update concentrations
+        float newA = A + (udA * laplaceA - A * B * B + ufeed * (1.0 - A));
+        float newB = B + (udB * laplaceB + A * B * B - (uk + ufeed) * B);
+        
+        // Clamp to prevent instability
+        newA = clamp(newA, 0.0, 1.0);
+        newB = clamp(newB, 0.0, 1.0);
+
+        vec2 uv = gl_FragCoord.xy / uResolution.xy; // Normalize pixel coordinates
+        
+
+
+        // Convert mouse position from pixel space to normalized texture space
+      
+        // Convert mouse position from pixel space to normalized texture space
+        vec2 mouse = vec2(x, y) / uResolution; // Normalize mouse position
+        mouse.y = 1.0 - mouse.y; // Invert the Y-coordinate to match the texture's coordinate system
+
+        // Scale the mouse position and texture coordinates based on aspect ratio
+        vec2 resolutionAspect = uResolution / min(uResolution.x, uResolution.y); // Aspect ratio scaling factor
+        vec2 adjustedUvs = (uv - 0.5) * resolutionAspect + 0.5;
+        vec2 adjustedMouse = (mouse - 0.5) * resolutionAspect + 0.5;
+        
+        // Calculate the distance between the adjusted mouse and the current pixel (uv)
+        float dist = distance(adjustedUvs, adjustedMouse);
+        // Apply effect to A when the mouse is within a certain distance
+        if (dist < mSize ) {
+          if(Rpress == 1.){
+            newB = .4; 
+          }
+          if(Lpress == 1.){
+            newA = 1.0;
+            newB = .0;
+          }
+       // You can change this value to modify the interaction strength
+        }
+        // Output the color
+        gl_FragColor = vec4(newA, newA-newB, newB, 1.0);
+      
+      }
+      </script>
+
+      <h2  class="t5">By Diego Ochoa</h2>
+      <a id="instructions" class="t4" href="https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system">Reaction Diffusion</a>
+      <a class="github" href="https://github.com/DiegoOchoaa/DiegoOchoaa.github.io" class="t3" >github</a>  
+
+      
+      <section id="settings" class="accordion">
+        <div class="tab">
+          <input type="checkbox" name="accordion-1" id="cb1" checked>
+          <label for="cb1" class="tab__label">settings</label>
+          <div class="tab__content">
+            <h1>Reaction Diffusion Settings</h1>
+            <div class="slidecontainer">
+              <h1> dB</h1>
+              <input type="range" min="0.6" max="1.16" value="1.0" class="slider" id="dBRange" step="0.01">
+              <h1 class="value" id="dBValue">?</h1>
+            </div>
+            <div class="slidecontainer">
+              <h1> dA</h1>
+              <input type="range" min="0" max="1" value="0.5" class="slider" id="dARange" step="0.01">
+              <h1 class="value"  id="dAValue">?</h1>
+            </div>
+            <div class="slidecontainer">
+              <h1>kill</h1>
+              <input type="range" min="0.05" max="0.09" value="0.061" class="slider" id="kRange" step="0.001">
+              <h1 class="value"  id="kValue">?</h1>
+            </div>
+            <div class="slidecontainer">
+              <h1>feed</h1>
+              <input type="range" min="0.03" max="0.08" value="0.055" class="slider" id="feedRange" step="0.001">
+              <h1 class="value"  id="feedValue">?</h1>
+            </div>
+            <div class="slidecontainer">
+              <h1>MouseSize</h1>
+              <input type="range" min="0.003" max="0.05" value="0.001" class="slider" id="sizeRange" step="0.001">
+              <h1 class="value"  id="sizeValue">?</h1>
+            </div>
+            <div class = "bottom">
+              <button class="text" id="clear">clear</button>
+              <button class="text" id="reset">reset</button> 
+            </div>
+
+            
+            
+            
+                    
+          </div>
+        </div>
+      </section>
+     
+    
+  <script src="index.js" type="module">
+  </script>
+</body>
+</html>
