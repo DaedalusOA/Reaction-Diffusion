@@ -42,7 +42,7 @@
           
           float final = initTexture.b;
 
-          gl_FragColor = vec4(final*0.5,final*0.9,final*2., 1.0);
+          gl_FragColor = vec4(1.-final*5.,1.-final*5.,1.-final*5., 1.0);
       }
       </script>
       
@@ -106,15 +106,18 @@
         laplaceB += texture2D(uTexture, vUvs + vec2(1, -1) / uResolution.xy).b * 0.05;
         laplaceB += texture2D(uTexture, vUvs + vec2(-1, 1) / uResolution.xy).b * 0.05;
         
+        vec2 uv = gl_FragCoord.xy / uResolution.xy; // Normalize pixel coordinates
+        
+
         // Update concentrations
-        float newA = A + (udA * laplaceA - A * B * B + ufeed * (1.0 - A));
+        float newA = A + ((udA) * laplaceA - A * B * B + ufeed * (1.0 - A));
         float newB = B + (udB * laplaceB + A * B * B - (uk + ufeed) * B);
         
         // Clamp to prevent instability
         newA = clamp(newA, 0.0, 1.0);
         newB = clamp(newB, 0.0, 1.0);
 
-        vec2 uv = gl_FragCoord.xy / uResolution.xy; // Normalize pixel coordinates
+        
         
 
 
@@ -171,7 +174,7 @@
             </div>
             <div class="slidecontainer">
               <h1>kill</h1>
-              <input type="range" min="0.05" max="0.09" value="0.061" class="slider" id="kRange" step="0.001">
+              <input type="range" min="0.05" max="0.09" value="0.062" class="slider" id="kRange" step="0.001">
               <h1 class="value"  id="kValue">?</h1>
             </div>
             <div class="slidecontainer">
