@@ -46,48 +46,6 @@ document.addEventListener('mouseup', function(event) {
 
 
 
-/////////touchhhhhhhhh
-// Function to handle touch events
-let touchX = 0;
-let touchY = 0;
-let touch = 0;
-
-
-
-
-// Function to handle touchstart event
-function handleTouchStart(event) {
-    // Prevent default behavior (optional)
-     touch = 1;
-
-    
-}
-
-// Function to handle touchmove event
-function handleTouchMove(event) {
-
-    // Get the updated touch coordinates
-    if (event.touches.length > 0) {
-        touchX = event.touches[0].clientX;
-        touchY = event.touches[0].clientY;
-        
-    }
-}
-
-// Function to handle touchend event
-function handleTouchEnd(event) {
-
-    touch = 0;
-}
-
-// Attach the touch event listeners
-document.addEventListener("touchstart", handleTouchStart, false);
-document.addEventListener("touchmove", handleTouchMove, false);
-document.addEventListener("touchend", handleTouchEnd, false);
-
-/////////touchhhhhhhhhh
-
-
 
 
 // Optional: Prevent the right-click menu from appearing
@@ -270,9 +228,7 @@ const camera = new THREE.OrthographicCamera(- 1, 1, 1, - 1, 0, 1);
  */
 // Get the first touch point's coordinates
    
-const rect = settings.getBoundingClientRect();
-const isInside = touchX >= rect.left && touchX <= rect.right && touchY >= rect.top && touchY <= rect.bottom;
- 
+
 
 const stepsPerFrame = 30; // Number of updates per frame
 
@@ -293,13 +249,11 @@ const tick = () => {
     bufferMaterial.uniforms.udB.value = dARange.value;
     bufferMaterial.uniforms.ufeed.value = feedRange.value;
     bufferMaterial.uniforms.uk.value = kRange.value;
-    bufferMaterial.uniforms.x.value = mouseX + touchX;
-    bufferMaterial.uniforms.y.value = mouseY + touchY;
-    if (!isInside){
-       bufferMaterial.uniforms.Rpress.value = LeftClick + touch;
-    }else{
-       bufferMaterial.uniforms.Rpress.value = LeftClick;
-    }
+    bufferMaterial.uniforms.x.value = mouseX ;
+    bufferMaterial.uniforms.y.value = mouseY;
+    
+   bufferMaterial.uniforms.Rpress.value = LeftClick;
+    
     bufferMaterial.uniforms.Lpress.value = RightClick;
     bufferMaterial.uniforms.mSize.value = sizeRange.value;
    
