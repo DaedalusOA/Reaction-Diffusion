@@ -1,9 +1,25 @@
 import * as THREE from "https://cdn.skypack.dev/three@0.146.0";
 
+function isMobile() {
+  return /Mobi|Android/i.test(navigator.userAgent);
+}
+
+function isMobileDevice() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  return /iphone|ipod|android|windows phone|blackberry|mobile/i.test(userAgent);
+}
+
+let ismob = isMobileDevice();
+
+if (ismob){
+  sizeRange.value= 0.07;
+  speedRange.value = 75;
+  alert("settings not available on mobile")
+}
 
 window.onload = function() {
   document.querySelectorAll('.accordion input[type="checkbox"]').forEach(input => {
-    input.checked = true; // Ensure all checkboxes are unchecked
+    input.checked = !ismob; // Ensure all checkboxes are unchecked
   });
 };
 /**
@@ -123,6 +139,7 @@ reset.addEventListener('click', function() {
   dBRange.value = 1.0;
   dARange.value= 0.5;
   feedRange.value= 0.055;
+  
   
 
   // Create a new data texture with a rectangle in the center
@@ -401,6 +418,7 @@ function createDataTexture() {
 
   return texture;
 }
+
 
 
 
