@@ -46,6 +46,63 @@ document.addEventListener('mouseup', function(event) {
 
 
 
+/////////touchhhhhhhhh
+// Function to handle touch events
+let touchX = 0;
+let touchY = 0;
+let touch = 0;
+
+
+
+
+// Function to handle touchstart event
+function handleTouchStart(event) {
+    // Prevent default behavior (optional)
+    event.preventDefault();
+
+    // Get the first touch point's coordinates
+    touchX = event.touches[0].clientX;
+    touchY = event.touches[0].clientY;
+    const rect = settings.getBoundingClientRect();
+    const isInside = touchX >= rect.left && touchX <= rect.right && touchY >= rect.top && touchY <= rect.bottom;
+ 
+    if (!isInside){
+      touch = 1;
+    }
+    
+
+    
+}
+
+// Function to handle touchmove event
+function handleTouchMove(event) {
+    // Prevent default behavior (optional)
+    event.preventDefault();
+
+    // Get the updated touch coordinates
+    if (event.touches.length > 0) {
+        touchX = event.touches[0].clientX;
+        touchY = event.touches[0].clientY;
+        
+    }
+}
+
+// Function to handle touchend event
+function handleTouchEnd(event) {
+    // Prevent default behavior (optional)
+    event.preventDefault();
+
+    touch = 0;
+}
+
+// Attach the touch event listeners
+document.addEventListener("touchstart", handleTouchStart, false);
+document.addEventListener("touchmove", handleTouchMove, false);
+document.addEventListener("touchend", handleTouchEnd, false);
+
+/////////touchhhhhhhhhh
+
+
 
 
 // Optional: Prevent the right-click menu from appearing
@@ -226,11 +283,8 @@ const camera = new THREE.OrthographicCamera(- 1, 1, 1, - 1, 0, 1);
 /**
  * Animate
  */
-// Get the first touch point's coordinates
-   
 
-
-const stepsPerFrame = 30; // Number of updates per frame
+const stepsPerFrame = 40; // Number of updates per frame
 
 const tick = () => {
   for (let i = 0; i < stepsPerFrame; i++) {
@@ -249,11 +303,9 @@ const tick = () => {
     bufferMaterial.uniforms.udB.value = dARange.value;
     bufferMaterial.uniforms.ufeed.value = feedRange.value;
     bufferMaterial.uniforms.uk.value = kRange.value;
-    bufferMaterial.uniforms.x.value = mouseX ;
-    bufferMaterial.uniforms.y.value = mouseY;
-    
-   bufferMaterial.uniforms.Rpress.value = LeftClick;
-    
+    bufferMaterial.uniforms.x.value = mouseX + touchX;
+    bufferMaterial.uniforms.y.value = mouseY + touchY;
+    bufferMaterial.uniforms.Rpress.value = LeftClick + touch;
     bufferMaterial.uniforms.Lpress.value = RightClick;
     bufferMaterial.uniforms.mSize.value = sizeRange.value;
    
@@ -292,8 +344,8 @@ function createDataTexture() {
   var data = new Uint8Array(4 * size);
 
   // Define the rectangle dimensions
-  var rectWidth = Math.floor(sizes.width * 0.05); // 20% of the texture width
-  var rectHeight = Math.floor(sizes.height * 0.05); // 20% of the texture height
+  var rectWidth = Math.floor(sizes.width * 0.01); // 20% of the texture width
+  var rectHeight = Math.floor(sizes.height * 0.01); // 20% of the texture height
 
   // Calculate the starting position of the rectangle
   var rectXStart = Math.floor((sizes.width - rectWidth) / 2);
@@ -340,5 +392,6 @@ function createDataTexture() {
 
   return texture;
 }
+
 
 
