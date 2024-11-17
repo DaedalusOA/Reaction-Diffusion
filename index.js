@@ -60,15 +60,10 @@ function handleTouchStart(event) {
     // Prevent default behavior (optional)
     event.preventDefault();
 
-    // Get the first touch point's coordinates
-    touchX = event.touches[0].clientX;
-    touchY = event.touches[0].clientY;
-    const rect = settings.getBoundingClientRect();
-    const isInside = touchX >= rect.left && touchX <= rect.right && touchY >= rect.top && touchY <= rect.bottom;
- 
-    if (!isInside){
-      touch = 1;
-    }
+    
+   
+     touch = 1;
+    
     
 
     
@@ -283,6 +278,11 @@ const camera = new THREE.OrthographicCamera(- 1, 1, 1, - 1, 0, 1);
 /**
  * Animate
  */
+// Get the first touch point's coordinates
+   
+const rect = settings.getBoundingClientRect();
+const isInside = touchX >= rect.left && touchX <= rect.right && touchY >= rect.top && touchY <= rect.bottom;
+ 
 
 const stepsPerFrame = 30; // Number of updates per frame
 
@@ -305,7 +305,11 @@ const tick = () => {
     bufferMaterial.uniforms.uk.value = kRange.value;
     bufferMaterial.uniforms.x.value = mouseX + touchX;
     bufferMaterial.uniforms.y.value = mouseY + touchY;
-    bufferMaterial.uniforms.Rpress.value = LeftClick + touch;
+    if (!isInside){
+       bufferMaterial.uniforms.Rpress.value = LeftClick + touch;
+    }else{
+       bufferMaterial.uniforms.Rpress.value = LeftClick;
+    }
     bufferMaterial.uniforms.Lpress.value = RightClick;
     bufferMaterial.uniforms.mSize.value = sizeRange.value;
    
