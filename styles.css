@@ -48,6 +48,9 @@ margin-left: 10px;
   position: absolute;
   top: 10px;
   left: 15px;
+  padding-left: 10px;
+  padding-right: 20px;
+ 
 
   
  
@@ -66,14 +69,19 @@ margin-left: 10px;
 
 .t5 {
   position: absolute;
-  left: 15px;
+  left: 10px;
   bottom: 0px;
   font-weight: 500;
   z-index: 2;
   font-size: 20px;
   color: rgba(255, 255, 255, 0.5);
+  padding: 5px;
+  padding-top: 5px;
+  padding-left: 5px;
+  
 
   mix-blend-mode: difference; 
+  
   
 
 
@@ -92,12 +100,17 @@ margin-left: 10px;
   position: absolute;
   top: 50px;
   left: 15px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
   
   z-index: 2;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   user-select: none; /* Prevents text selection */
   mix-blend-mode: difference; 
+  
+ 
   
   
   
@@ -136,6 +149,8 @@ font-weight: 500;
 font-family: "Quicksand", serif;
 user-select: none; /* Prevents text selection */
 display: block;
+padding-left: 10px;
+padding-right: 15px;
 
 
 
@@ -159,6 +174,7 @@ display: none;
 border-radius: 10px;
 transform: translateY(40px);
 filter: invert(1);
+
 
 
 }
