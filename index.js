@@ -58,21 +58,13 @@ let touch = 0;
 // Function to handle touchstart event
 function handleTouchStart(event) {
     // Prevent default behavior (optional)
-    event.preventDefault();
-
-    
-   
      touch = 1;
-    
-    
 
     
 }
 
 // Function to handle touchmove event
 function handleTouchMove(event) {
-    // Prevent default behavior (optional)
-    event.preventDefault();
 
     // Get the updated touch coordinates
     if (event.touches.length > 0) {
@@ -84,8 +76,6 @@ function handleTouchMove(event) {
 
 // Function to handle touchend event
 function handleTouchEnd(event) {
-    // Prevent default behavior (optional)
-    event.preventDefault();
 
     touch = 0;
 }
