@@ -23,14 +23,16 @@ h1 {
   font-family: "Quicksand", serif;
   user-select: none; /* Prevents text selection */
   margin-right: 10px;
-  transition: ease-in 0.2s;
-  transition: ease-out 0.8s;
+  transition: ease-in 0.1s;
+  transition: ease-out 0.1s;
+  padding-left: 15px;
+  padding-right: 15px;
   
   
   
 }
 h1:hover{
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .value{
@@ -221,6 +223,9 @@ font-size: 17px;
 font-weight: 600;
 font-family: "Quicksand", serif;
 transition: ease-in-out 0.1s;
+padding-left: 20px;
+padding-right: 20px;
+height: 40px;
 
   
  
