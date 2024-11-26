@@ -1,6 +1,8 @@
 # Reaction-Diffusion Simulation
 This is a **Reaction-Diffusion** simulation I made using shaders with WebGL and Three.js, you can play with the **website** at https://diegoochoaa.github.io/Reaction-Diffusion/
 
+<img width="1223" alt="RDD" src="https://github.com/user-attachments/assets/0f286bf5-c071-4241-bfd3-b2bd989e2995">
+
 ### How it works
 
 It works by using two shaders that interchange themselves with a **ping-pong** system, 
@@ -13,6 +15,3 @@ For the simulation to avoid certain areas of the website I coded it to put green
  - This is one that helped to set up WebGL and three.js: https://tympanus.net/codrops/2022/11/25/conways-game-of-life-cellular-automata-and-renderbuffers-in-three-js/
 
 
-
-
-<img width="1223" alt="RDD" src="https://github.com/user-attachments/assets/164880a5-f467-4cc2-bcf7-836677bdd896">
