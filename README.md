@@ -15,3 +15,4 @@ For the simulation to avoid certain areas of the website I coded it to put green
 
 
 
+<img width="1223" alt="RDD" src="https://github.com/user-attachments/assets/164880a5-f467-4cc2-bcf7-836677bdd896">
