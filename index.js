@@ -14,7 +14,7 @@ let ismob = isMobileDevice();
 if (ismob){
   sizeRange.value= 0.07;
   speedRange.value = 75;
- 
+  alert("settings not available on mobile")
 }
 
 window.onload = function() {
@@ -26,13 +26,26 @@ window.onload = function() {
  * Base
  */
 
-// Scenes
+// Sceneswubdow 
 const scene = new THREE.Scene();
 const bufferScene = new THREE.Scene();
 
+
+//window functions: 
+
+//other stuff for js func
+document.querySelector('.opener').addEventListener('change', function () {
+  const parameters = document.querySelector('.parameters');
+  if (this.checked) {
+    parameters.style.transform = 'translateX(0)';  // Change color on check
+  } else {
+    parameters.style.transform = 'translateX(-100%)';  // Reset color when unchecked
+  }
+});
+
 // Select the button using its ID
-const reset = document.getElementById('reset');
-const clear = document.getElementById('clear');
+//const reset = document.getElementById('reset');
+//const clear = document.getElementById('clear');
 
 var mouseX = 0;
 var mouseY = 0;
@@ -134,40 +147,41 @@ document.addEventListener('contextmenu', function(event) {
 
 
 // Add a click event listener to the button
-reset.addEventListener('click', function() {
-  kRange.value = 0.062;
-  dBRange.value = 1.0;
-  dARange.value= 0.5;
-  feedRange.value= 0.055;
+//reset.addEventListener('click', function() {
+  //kRange.value = 0.062;
+  //dBRange.value = 1.0;
+  //dARange.value= 0.5;
+  //feedRange.value= 0.055;
   
   
 
   // Create a new data texture with a rectangle in the center
-  const newDataTexture = createDataTexture();
+  //const newDataTexture = createDataTexture();
 
   // Update the texture in the buffer material
-  bufferMaterial.uniforms.uTexture.value = newDataTexture;
+  //bufferMaterial.uniforms.uTexture.value = newDataTexture;
 
-  renderer.setRenderTarget(renderBufferA);
-  renderer.clear();
+  //renderer.setRenderTarget(renderBufferA);
+  //renderer.clear();
 
-  renderer.setRenderTarget(renderBufferB);
-  renderer.clear();
+  //renderer.setRenderTarget(renderBufferB);
+  //renderer.clear();
 
-});
-clear.addEventListener('click', function() {
-  const newDataTexture = createDataTexture(true);
+//});
+
+///clear.addEventListener('click', function() {
+ // const newDataTexture = createDataTexture(true);
 
   // Update the texture in the buffer material
-  bufferMaterial.uniforms.uTexture.value = newDataTexture;
+//  bufferMaterial.uniforms.uTexture.value = newDataTexture;
 
-  renderer.setRenderTarget(renderBufferA);
-  renderer.clear();
+//  renderer.setRenderTarget(renderBufferA);
+///  renderer.clear();
 
-  renderer.setRenderTarget(renderBufferB);
-  renderer.clear();
+ // renderer.setRenderTarget(renderBufferB);
+ //// renderer.clear();
 
-});
+//});
 
 
 
@@ -313,10 +327,9 @@ const camera = new THREE.OrthographicCamera(- 1, 1, 1, - 1, 0, 1);
  * Animate
  */
 
-const stepsPerFrame = 25; // Number of updates per frame
 
 const tick = () => {
-  for (let i = 0; i < speedRange.value; i++) {
+  for (let i = 0; i < speedRange.value; i++) { //speedRange.value
     // Render to the offscreen buffer
     renderer.setRenderTarget(renderBufferA);
     renderer.render(bufferScene, camera);
@@ -337,6 +350,7 @@ const tick = () => {
     bufferMaterial.uniforms.Rpress.value = LeftClick;
     bufferMaterial.uniforms.Lpress.value = RightClick + touch;
     bufferMaterial.uniforms.mSize.value = sizeRange.value;
+   
    
     
     
@@ -382,36 +396,8 @@ function createDataTexture(clr = false) {
   var rectXStart = Math.floor((sizes.width - rectWidth) / 2);
   var rectYStart = Math.floor((sizes.height - rectHeight) / 2);
 
-  // Get title rectangle and scale it to texture coordinates
   
-  // Get title rectangle and scale it to texture coordinates
-  const tiRect = Name.getBoundingClientRect();
-  const textureXScale = sizes.width / window.innerWidth;
-  const textureYScale = sizes.height / window.innerHeight;
-  const rectLeft = Math.floor(tiRect.left * textureXScale);
-  const rectRight = Math.floor(tiRect.right * textureYScale);
-  const rectTop = Math.floor((window.innerHeight - tiRect.bottom) * textureYScale); // Flip y
-  const rectBottom = Math.floor((window.innerHeight - tiRect.top) * textureYScale); // Flip y
-
-  const st_Rect = Sett.getBoundingClientRect();
-  const st_rectLeft = Math.floor(st_Rect.left * textureXScale);
-  const st_rectRight = Math.floor(st_Rect.right * textureXScale);
-  const st_rectTop = Math.floor((window.innerHeight - st_Rect.bottom) * textureYScale); // Flip y
-  const st_rectBottom = Math.floor((window.innerHeight - st_Rect.top) * textureYScale); // Flip y
-
-  const tt_Rect = Title.getBoundingClientRect();
-  const tt_rectLeft = Math.floor(tt_Rect.left * textureXScale);
-  const tt_rectRight = Math.floor(tt_Rect.right * textureXScale);
-  const tt_rectTop = Math.floor((window.innerHeight - tt_Rect.bottom) * textureYScale); // Flip y
-  const tt_rectBottom = Math.floor((window.innerHeight - tt_Rect.top) * textureYScale); // Flip 
-
-  const g_Rect = git.getBoundingClientRect();
-  const g_rectLeft = Math.floor(g_Rect.left * textureXScale);
-  const g_rectRight = Math.floor(g_Rect.right * textureXScale);
-  const g_rectTop = Math.floor((window.innerHeight - g_Rect.bottom) * textureYScale); // Flip y
-  const g_rectBottom = Math.floor((window.innerHeight - g_Rect.top) * textureYScale); // Flip 
-
-
+  
 
   // Loop through each pixel in the texture
   for (var y = 0; y < sizes.height; y++) {
@@ -431,39 +417,7 @@ function createDataTexture(clr = false) {
         data[stride + 1] = 0; // Green
         data[stride + 2] = 0; // Blue
         data[stride + 3] = 255; // Alpha
-      }else if( x >= rectLeft && x < rectRight && y >= rectTop && y < rectBottom){
-        // Set the pixel to white
-        data[stride] = 0; // Red
-        data[stride + 1] = 255; // Green
-        data[stride + 2] = 0; // Blue
-        data[stride + 3] = 255; // Alpha
-
-
-      } else if( x >= st_rectLeft && x < st_rectRight && y >= st_rectTop && y < st_rectBottom){
-        // Set the pixel to white
-        data[stride] = 0; // Red
-        data[stride + 1] = 255; // Green
-        data[stride + 2] = 0; // Blue
-        data[stride + 3] = 255; // Alpha
-
-
-      }else if( x >= tt_rectLeft && x < tt_rectRight && y >= tt_rectTop && y < tt_rectBottom){
-        // Set the pixel to white
-        data[stride] = 0; // Red
-        data[stride + 1] = 255; // Green
-        data[stride + 2] = 0; // Blue
-        data[stride + 3] = 255; // Alpha
-
-
-      } else if( x >= g_rectLeft && x < g_rectRight && y >= g_rectTop && y < g_rectBottom){
-        // Set the pixel to white
-        data[stride] = 0; // Red
-        data[stride + 1] = 255; // Green
-        data[stride + 2] = 0; // Blue
-        data[stride + 3] = 255; // Alpha
-
-
-      } else {
+      }else {
         // Set the pixel to black
         data[stride] = 0; // Red
         data[stride + 1] = 0; // Green
@@ -489,6 +443,8 @@ function createDataTexture(clr = false) {
 
   return texture;
 }
+
+
 
 
 
