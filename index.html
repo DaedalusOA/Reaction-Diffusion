@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reaction Diffusion Simulation</title>
+  
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Quicksand:wght@300..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="icon" href="logoo.png" type="image/png">
+  <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
     <script id="vertexShader" type="x-shader/x-vertex">
@@ -26,6 +27,7 @@
         precision mediump float;
         //Our input texture
         uniform sampler2D uTexture; 
+        
         varying vec2 vUvs;
         uniform vec2 uResolution;
 
@@ -165,58 +167,60 @@
       }
       </script>
 
-      <h2 id="Name" class="t5">By Diego Ochoa</h2>
-      <a id="Title" id="instructions" class="t4" href="https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system">Reaction Diffusion</a>
-      <a id="git" class="github" href="https://github.com/DiegoOchoaa/Reaction-Diffusion" class="t3" >github</a>  
+      <div id="settings" class="parameters">
 
-      
-      <section id="settings" class="accordion">
-        <div class="tab">
-          <input type="checkbox" name="accordion-1" id="cb1" checked>
-          <label id="Sett" for="cb1" class="tab__label">parameters</label>
-          <div class="tab__content">
-            <div class="slidecontainer">
-              <h1> dB</h1>
-              <input type="range" min="0.01" max="1.16" value="1.0" class="slider" id="dBRange" step="0.001">
-              <h1 class="value" id="dBValue">?</h1>
-            </div>
-            <div class="slidecontainer">
-              <h1> dA</h1>
-              <input type="range" min="0.2" max="1" value="0.5" class="slider" id="dARange" step="0.001">
-              <h1 class="value"  id="dAValue">?</h1>
-            </div>
-            <div class="slidecontainer">
-              <h1>kill</h1>
-              <input type="range" min="0.01" max="0.08" value="0.062" class="slider" id="kRange" step="0.0001">
-              <h1 class="value"  id="kValue">?</h1>
-            </div>
-            <div class="slidecontainer">
-              <h1>feed</h1>
-              <input type="range" min="0.00" max="0.1" value="0.055" class="slider" id="feedRange" step="0.0001">
-              <h1 class="value"  id="feedValue">?</h1>
-            </div>
-            <div class="slidecontainer">
-              <h1>size</h1>
-              <input type="range" min="0.003" max="0.1" value="0.01" class="slider" id="sizeRange" step="0.0001">
-              <h1 class="value"  id="sizeValue">?</h1>
-            </div>
-            <div class="slidecontainer">
-              <h1>speed</h1>
-              <input type="range" min="1" max="100" value="25" class="slider" id="speedRange" step="1">
-              <h1 class="value"  id="speedValue">?</h1>
-            </div>
-            <div class = "bottom">
-              <button class="text" id="clear">clear</button>
-              <button class="text" id="reset">reset</button> 
-            </div>
-
-            
-            
-            
-                    
-          </div>
+        <div class="space">
+          <h2 class="settings">parameters</h2>
         </div>
-      </section>
+        <div class="slidecontainer">
+          <h1> dB</h1>
+          <input type="range" min="0.01" max="1.16" value="1.0" class="slider" id="dBRange" step="0.001">
+          <h1 class="value" id="dBValue">?</h1>
+        </div>
+        <div class="slidecontainer">
+          <h1> dA</h1>
+          <input type="range" min="0.2" max="1" value="0.5" class="slider" id="dARange" step="0.001">
+          <h1 class="value"  id="dAValue">?</h1>
+        </div>
+        <div class="slidecontainer">
+          <h1>kill</h1>
+          <input type="range" min="0.01" max="0.08" value="0.062" class="slider" id="kRange" step="0.0001">
+          <h1 class="value"  id="kValue">?</h1>
+        </div>
+        <div class="slidecontainer">
+          <h1>feed</h1>
+          <input type="range" min="0.00" max="0.1" value="0.055" class="slider" id="feedRange" step="0.0001">
+          <h1 class="value"  id="feedValue">?</h1>
+        </div>
+        <div class="slidecontainer">
+          <h1>size</h1>
+          <input type="range" min="0.003" max="0.1" value="0.01" class="slider" id="sizeRange" step="0.0001">
+          <h1 class="value"  id="sizeValue">?</h1>
+        </div>
+        <div class="slidecontainer">
+          <h1>speed</h1>
+          <input type="range" min="1" max="100" value="25" class="slider" id="speedRange" step="1">
+          <h1 class="value"  id="speedValue">?</h1>
+        </div>
+        <div class = "bottom">
+          <button class="text" id="reset">reset</button> 
+        </div>
+        <div class = "bottom">
+          <button class="text" id="clear">clear</button> 
+        </div>
+        <div class="code_cont">
+          <a class="code">source code</a>
+        </div>
+       
+       </div>
+       <a class ="author"href="https://diegoochoaa.github.io/portafolio/">By Diego Ochoa</a>
+    
+        <label class="custom-checkbox">
+          <input type="checkbox" class="opener">
+          <h1 class="checker">+</h1>
+        </label>
+      
+     
      
     
   <script src="index.js" type="module">
