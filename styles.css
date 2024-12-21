@@ -1,246 +1,156 @@
 body{
   margin: 0px;
   overflow: hidden;
-  background-color: black;
-}
+  background-color: white;
 
-
-h2 {
-  z-index: 2; /* Higher z-index to appear above the canvas */
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 20px;
-  font-weight: 600;
   font-family: "Quicksand", serif;
-  user-select: none; /* Prevents text selection */
-  
-}
-
-h1 {
-  z-index: 2; /* Higher z-index to appear above the canvas */
-  color: rgba(0,0,0, 0.8);
-  font-size: 14px;
-  font-weight: 500;
-  font-family: "Quicksand", serif;
-  user-select: none; /* Prevents text selection */
-  margin-right: 10px;
-  transition: ease-in 0.1s;
-  transition: ease-out 0.1s;
-  padding-left: 15px;
-  padding-right: 15px;
-  
-  
-  
-}
-h1:hover{
-  font-weight: 800;
-}
-
-.value{
-margin-left: 10px;
-}
-
-
-.t4 {
-  z-index: 2; /* Higher z-index to appear above the canvas */
-  font-size: 30px;
-  font-weight: 500;
-  font-family: "Quicksand", serif;
-  transition: ease-in-out 0.2s;
-
-  position: absolute;
-  top: 10px;
-  left: 15px;
-
- 
-
-  
- 
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  user-select: none; /* Prevents text selection */
-  mix-blend-mode: difference; 
-}
-.t4:hover{
-  font-weight: 600;
-  transform: scale(0.9) translateX(-7px);
-  color: rgba(255, 255, 255, 1);
-  
-}
-
-.t5 {
-  position: absolute;
-  left: 10px;
-  bottom: 0px;
-  font-weight: 500;
-  z-index: 2;
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.5);
-  padding-right: 10px;
-
-  
-
-  mix-blend-mode: difference; 
-  
-  
-
-
-}
-
-
-
-.github {
-  z-index: 2; /* Higher z-index to appear above the canvas */
-
-  font-size: 20px;
-  font-weight: 600;
-  font-family: "Quicksand", serif;
-  transition: ease-in-out 0.2s;
-
-  position: absolute;
-  top: 50px;
-  left: 15px;
-  padding-right: 5px;
- 
-  
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  user-select: none; /* Prevents text selection */
-  mix-blend-mode: difference; 
-  
- 
-  
-  
-  
-}
-.github:hover{
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.9);
-  transform: scale(0.9);
  
 }
 
 
-
-
-
-
-
-
-/* Style the accordion container */
-.accordion {
+/* Hide the default checkbox */
+input.opener {
+display: none;
 position: absolute;
-right: 15px;
-width: 60%;
-max-width: 350px;
-margin: 20px auto;
 }
 
-/* Hide the checkbox inputs */
-.accordion input[type="checkbox"] {
-display: none;
+/* Style the custom checkbox */
+.custom-checkbox {
+position: absolute;
+cursor: pointer;
+padding-left: 25px;
+transition: transform 0.5s ease-in-out;
+height: 0%;
+
+
 }
 
-/* Style the label (accordion title) */
-.accordion .tab__label {
-font-weight: 500;
-font-family: "Quicksand", serif;
-user-select: none; /* Prevents text selection */
-display: block;
-padding-left: 5px;
+
+
+.checker {
+font-family:'Courier New', Courier, monospace;
+font-weight: 400;
+transition: ease-in-out 0.3s;
+margin: 0px;
+font-size: 30px;
+
+padding-left: 7px;
+padding-top: 9px;
+padding-right: 7px;
+border-radius: 3px;
+
+
+}
+
+/* Handle the checked state */
+input.opener:checked + .checker {
+transform: translateX(290px);
+
+
+}
+
+.plus{
+color: red;
+}
+.parameters{
+position: absolute;
+
+background-color: rgba(255, 255, 255, 0.8);
+
+width: 350px;
+backdrop-filter: blur(3px);
+
+
+}
+
+/* Handle the checked state */
+input.opener:checked ~ .parameters {
+
+background-color: rgba(208, 208, 208, 0);
+
+
+}
+.parameters{
+transition: ease-in-out 0.3s;
+transform: translateX(-100%);
+
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
 
 
 
+}
 
-background-color: transparent;
-color: rgba(255, 255, 255, 0.6);
-mix-blend-mode: difference; 
+.settings{
+font-weight: 200;
 font-size: 20px;
-cursor: pointer;
-position: absolute; /* Position the label */
-right: 15px; /* Align to the right side */
+margin: 0px;
+padding: 10px;
+
+
+
+
+
+
+}
+.code_cont{
+border-bottom: 1px solid black;
+width: 100%;
+
+border-right: 1px solid black;
+display: flex;
+justify-content: center;
+
+
+
+}
+.code_cont:hover{
+font-weight: 600;
+background-color: rgba(0, 0, 0, 0.08);
+}
+.code{
+font-weight: 500;
+font-size: 16px;
+padding: 10px;
 transition: ease-in-out 0.3s;
-}
 
-/* Style the content (hidden by default) */
-.accordion .tab__content {
-transition: ease-in-out 0.3s;
-border: 1.5px solid black; /* Add white border */
-
-background-color: rgba(255,255,255, 0.6);
-display: none;
-border-radius: 10px;
-transform: translateY(40px);
-filter: invert(1);
 
 
 }
-/* Show the content when the checkbox is checked */
-.accordion input[type="checkbox"]:checked + .tab__label + .tab__content {
-display: block;
+.code:hover{
+font-weight: 800;
 
-}
-.tab__label:hover{
-font-weight: 600;
-transform: scale(0.9);
-}
-
-
-
-/* Show the content when the checkbox is checked */
-.accordion input[type="checkbox"]:checked + .tab__label {
-
-font-weight: 600;
-color: rgba(255,255,255, 0.9);
-mix-blend-mode: difference; 
-}
-
-
-
-.bottom{
-display: flex;          /* Enable flexbox layout */
-width: 100%;            /* Full width of the container */
-flex-direction: row;    /* Align text and slider in a row */
-align-items: center;    /* Vertically align items in the center */
-justify-content: space-between; /* Ensure the elements are aligned to the left */
-flex-wrap: nowrap; 
-   
 
 }
 
+.space{
+
+border-bottom: 1px solid black;
+width: 100%;
+border-right: 1px solid black;
 
 
 
-.text{
 
-background: none; 
-border: none; 
-cursor: pointer;
 
-z-index: 2; /* Higher z-index to appear above the canvas */
-font-size: 17px;
-font-weight: 600;
-font-family: "Quicksand", serif;
-transition: ease-in-out 0.1s;
-padding-left: 20px;
-padding-right: 20px;
-height: 40px;
-
-  
- 
-z-index: 2;
-color: rgba(0,0,0, 0.8);
+}
+.author{
+position: absolute;
 text-decoration: none;
-user-select: none; /* Prevents text selection */
+font-size: 20px;
+font-weight: 500;
+color: black;
+left: 20px;
+bottom: 20px;
+transition: ease-in-out 0.3s;
+}
+.author:hover{
+letter-spacing: 1px;
+font-weight: 600;
 }
 
 
-.text:hover{
-font-weight: 700;
-color: rgba(0,0,0, 1);
-
-}
 
 
 
@@ -256,23 +166,26 @@ flex-direction: row;    /* Align text and slider in a row */
 align-items: center;    /* Vertically align items in the center */
 justify-content: space-evenly; /* Ensure the elements are aligned to the left */
 flex-wrap: nowrap;      /* Prevent wrapping of elements */
+transition: ease-in-out 0.2s;
 }
+.slidecontainer:hover{
+background-color: rgba(0, 0, 0, 0.08);
+}
+
 
 .slider {
 -webkit-appearance: none;
 width: 70%;
 height: 4px;
 border-radius: 5px;  
-background: rgba(0,0,0, 0.5);
+background: rgba(0,0,0, 0.1);
 outline: none;
 -webkit-transition: .2s;
 transition: opacity .2s;
 transition: ease-in-out 0.1s;
 }
 
-.slider:hover{
-background: rgba(0,0,0, 0.8);
-}
+
 .slider::-webkit-slider-thumb {
 -webkit-appearance: none;
 appearance: none;
@@ -291,3 +204,116 @@ border-radius: 50%;
 background: #04AA6D;
 cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+.value{
+width: 3ch; 
+}
+
+
+.slidecontainer {
+display: flex;          /* Enable flexbox layout */
+width: 100%;            /* Full width of the container */
+flex-direction: row;    /* Align text and slider in a row */
+align-items: center;    /* Vertically align items in the center */
+justify-content: space-evenly; /* Ensure the elements are aligned to the left */
+flex-wrap: nowrap;      /* Prevent wrapping of elements */
+border-bottom: 1px solid black;
+border-right: 1px solid black;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.slider {
+-webkit-appearance: none;
+width: 70%;
+height: 4px;
+border-radius: 5px;  
+background: rgba(0,0,0, 0.1);
+outline: none;
+-webkit-transition: .2s;
+transition: opacity .2s;
+transition: ease-in-out 0.1s;
+}
+.slider:hover{
+  background: rgba(0,0,0, 0.2);
+ }
+
+h1{
+  font-size: 15px;
+  font-weight: 400;
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+
+}
+
+
+.slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 15px;
+height: 15px;
+border-radius: 50%; 
+background: rgba(255,255,255, 1);
+border: 1px solid black;
+opacity: 1;
+cursor: pointer;
+}
+
+
+
+
+
+.text{
+
+
+background: none; 
+border: none; 
+cursor: pointer;
+
+z-index: 2; /* Higher z-index to appear above the canvas */
+font-size: 17px;
+font-weight: 400;
+font-family: "Quicksand", serif;
+transition: ease-in-out 0.1s;
+
+
+color: rgba(0,0,0, 0.8);
+text-decoration: none;
+user-select: none; /* Prevents text selection */
+padding: 10px;
+padding-left: 20px;
+padding-right: 20px;
+width: 100%;
+
+background-color: transparent;
+
+
+}
+.text:hover{
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+
+.bottom{
+display: flex;          /* Enable flexbox layout */
+width: 100%;            /* Full width of the container */
+flex-direction: row;    /* Align text and slider in a row */
+align-items: center;    /* Vertically align items in the center */
+justify-content: space-between; /* Ensure the elements are aligned to the left */
+border-bottom: 1px solid black;
+border-right: 1px solid black;
+   
+
+}
+
