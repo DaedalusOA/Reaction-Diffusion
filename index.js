@@ -44,8 +44,8 @@ document.querySelector('.opener').addEventListener('change', function () {
 });
 
 // Select the button using its ID
-//const reset = document.getElementById('reset');
-//const clear = document.getElementById('clear');
+const reset = document.getElementById('reset');
+const clear = document.getElementById('clear');
 
 var mouseX = 0;
 var mouseY = 0;
@@ -147,41 +147,41 @@ document.addEventListener('contextmenu', function(event) {
 
 
 // Add a click event listener to the button
-//reset.addEventListener('click', function() {
-  //kRange.value = 0.062;
-  //dBRange.value = 1.0;
-  //dARange.value= 0.5;
-  //feedRange.value= 0.055;
+reset.addEventListener('click', function() {
+  kRange.value = 0.062;
+  dBRange.value = 1.0;
+  dARange.value= 0.5;
+  feedRange.value= 0.055;
   
   
 
   // Create a new data texture with a rectangle in the center
-  //const newDataTexture = createDataTexture();
+  const newDataTexture = createDataTexture();
 
   // Update the texture in the buffer material
-  //bufferMaterial.uniforms.uTexture.value = newDataTexture;
+  bufferMaterial.uniforms.uTexture.value = newDataTexture;
 
-  //renderer.setRenderTarget(renderBufferA);
-  //renderer.clear();
+  renderer.setRenderTarget(renderBufferA);
+  renderer.clear();
 
-  //renderer.setRenderTarget(renderBufferB);
-  //renderer.clear();
+  renderer.setRenderTarget(renderBufferB);
+  renderer.clear();
 
-//});
+});
 
-///clear.addEventListener('click', function() {
- // const newDataTexture = createDataTexture(true);
+clear.addEventListener('click', function() {
+  const newDataTexture = createDataTexture(true);
 
   // Update the texture in the buffer material
-//  bufferMaterial.uniforms.uTexture.value = newDataTexture;
+  bufferMaterial.uniforms.uTexture.value = newDataTexture;
 
-//  renderer.setRenderTarget(renderBufferA);
-///  renderer.clear();
+  renderer.setRenderTarget(renderBufferA);
+  renderer.clear();
 
- // renderer.setRenderTarget(renderBufferB);
- //// renderer.clear();
+  renderer.setRenderTarget(renderBufferB);
+  renderer.clear();
 
-//});
+});
 
 
 
@@ -443,6 +443,8 @@ function createDataTexture(clr = false) {
 
   return texture;
 }
+
+
 
 
 
