@@ -14,7 +14,7 @@ let ismob = isMobileDevice();
 if (ismob){
   sizeRange.value= 0.07;
   speedRange.value = 75;
- 
+  alert("settings not available on mobile")
 }
 
 window.onload = function() {
@@ -443,8 +443,6 @@ function createDataTexture(clr = false) {
 
   return texture;
 }
-
-
 
 
 
