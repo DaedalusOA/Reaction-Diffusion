@@ -1,5 +1,5 @@
 # Reaction-Diffusion Simulation
-This is a **Reaction-Diffusion** simulation I made using shaders with WebGL and Three.js, you can play with the **website** at https://diegoochoaa.github.io/Reaction-Diffusion/
+This is a **Reaction-Diffusion** simulation I made using shaders with WebGL and Three.js, you can play with the **website** at https://daedalusoa.github.io/Reaction-Diffusion/
 
 <img width="1223" alt="RDD" src="https://github.com/user-attachments/assets/0f286bf5-c071-4241-bfd3-b2bd989e2995">
 
